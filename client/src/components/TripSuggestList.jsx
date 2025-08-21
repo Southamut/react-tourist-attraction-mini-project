@@ -30,20 +30,17 @@ function TripSuggestList(props) {
                             <div className="flex flex-row gap-2 flex-wrap">
                                 <p className="text-xs md:text-sm font-medium text-gray-500">หมวด</p>
                                 {item.tags.map((tag, index) => {
-                                    if (index < item.tags.length - 1) {
-                                        return (
-                                            <Tag tag={tag} />
-                                        );
-                                    } else {
-                                        return (
-                                            <>
-                                                <p className="text-xs md:text-sm lg:text-md font-medium text-gray-500">และ</p>
-                                                <Tag tag={tag} />
-                                            </>
-                                        );
+                                    if (index === item.tags.length - 1 && index > 0) {
+                                        return [
+                                            <p
+                                                key={`and-${index}`}
+                                                className="text-xs md:text-sm lg:text-md font-medium text-gray-500"
+                                            >และ</p>,
+                                            <Tag key={`tag-${index}`} tag={tag} onTagClick={props.onTagClick} />
+                                        ];
                                     }
+                                    return <Tag key={`tag-${index}`} tag={tag} onTagClick={props.onTagClick} />;
                                 })}
-
                             </div>
                         </div>
 
@@ -73,7 +70,10 @@ function DetailPhoto(props) {
 
 function Tag(props) {
     return (
-        <button className="text-xs md:text-sm lg:text-md font-light hover:text-orange-400 text-blue-400 underline">
+        <button
+            key={props.index}
+            onClick={() => props.onTagClick(props.tag)}//to run tag function that input is (props.tag)
+            className="text-xs md:text-sm lg:text-md font-light hover:text-orange-400 text-blue-400 underline">
             {props.tag}
         </button>
     )
