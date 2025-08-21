@@ -15,6 +15,7 @@ function HomePage() {
     //For Displaying
     const [toDisplay, setToDisplay] = useState([]);
 
+    //Get Data
     const getData = async () => {
         try {
             const response = await axios.get(`http://localhost:4001/trips?keywords=${keywords}`)
@@ -24,10 +25,26 @@ function HomePage() {
         }
     }
 
+    //Trigger
     useEffect(() => {
         getData();
     }, [keywords]);
 
+    //For tag search
+    const [selectedTags, setSelectedTags] = useState([]);
+
+    //Tag Click
+    const handleTagClick = (tag) => {
+        //to prevent the same tag
+        if (!selectedTags.includes(tag)) {
+            const newTags = [...selectedTags, tag];
+            setSelectedTags(newTags);
+
+            //to send it to input like typing
+            const newSearchText = newTags.join(" ");
+            setKeywords(newSearchText + " ");
+        }
+    };
 
     //Displaying
     return (
@@ -47,11 +64,12 @@ function HomePage() {
                     placeholder="หาที่เที่ยวแล้วไปกัน..."
                     className="w-9/12 p-2 text-center border-b-1 border-gray-300"
                     onChange={handleChange}
+                    value={keywords}
                 />
             </div>
 
             {/* list of trips */}
-            <TripSuggestList toDisplay={toDisplay} />
+            <TripSuggestList toDisplay={toDisplay} onTagClick={handleTagClick} />
         </div>
     )
 }
