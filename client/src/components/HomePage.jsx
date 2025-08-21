@@ -18,7 +18,6 @@ function HomePage() {
     const getData = async () => {
         try {
             const response = await axios.get(`http://localhost:4001/trips?keywords=${keywords}`)
-            // console.log(response.data.data);
             setToDisplay(response.data.data);
         } catch (error) {
             console.log(error);
@@ -33,18 +32,20 @@ function HomePage() {
     //Displaying
     return (
         // window box
-        <div className="bg-white w-full border border-red-500">
+        <div className="bg-white w-full">
             {/* title */}
             <div className="flex flex-col items-center justify-center mt-15">
-                <h1 className="text-5xl font-sans font-bold text-blue-400">เที่ยวไหนดี</h1>
+                <h1 className="text-5xl font-bold text-blue-400">เที่ยวไหนดี</h1>
             </div>
 
             {/* search box */}
-            <div className="flex flex-col items-center justify-center mt-10 border border-red-700">
-                <label htmlFor="search" className="text-sm font-sans font-bold border border-red-500 text-gray-500 w-9/12 text-left">หาที่เที่ยวแล้วไปกัน</label>
+            <div className="flex flex-col items-center justify-center mt-10 mb-5">
+                <label htmlFor="search"
+                    className="text-sm font-bold text-gray-500 w-9/12 text-left"
+                >หาที่เที่ยวแล้วไปกัน</label>
                 <input type="text"
-                    placeholder="ค้นหา"
-                    className="w-9/12 p-2 rounded-md border border-green-500"
+                    placeholder="หาที่เที่ยวแล้วไปกัน..."
+                    className="w-9/12 p-2 text-center border-b-1 border-gray-300"
                     onChange={handleChange}
                 />
             </div>
