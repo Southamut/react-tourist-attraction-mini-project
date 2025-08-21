@@ -1,4 +1,7 @@
+import linkIcon from "../assets/link-circle-svgrepo-com.svg";
+
 function TripSuggestList(props) {
+    //to render trip suggest list
     return (
         <div className="flex flex-col items-center justify-center mt-10">
 
@@ -14,7 +17,7 @@ function TripSuggestList(props) {
                     </div>
 
                     {/* right-box */}
-                    <div className="w-full sm:pl-4 sm:w-2/3 flex flex-col gap-1">
+                    <div className="w-full sm:pl-4 sm:w-2/3 flex flex-col gap-1 relative">
                         {/* half-top */}
                         <div>
                             <a
@@ -50,6 +53,8 @@ function TripSuggestList(props) {
                             <DetailPhoto photo={item.photos[2]} />
                             <DetailPhoto photo={item.photos[3]} />
                         </div>
+
+                        <LinkButton item={item} />
                     </div>
                 </div>
             ))}
@@ -57,6 +62,8 @@ function TripSuggestList(props) {
     )
 }
 
+
+//to render detail photo
 function DetailPhoto(props) {
     return (
         <div className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
@@ -68,6 +75,8 @@ function DetailPhoto(props) {
     )
 }
 
+
+// to render tags
 function Tag(props) {
     return (
         <button
@@ -76,6 +85,34 @@ function Tag(props) {
             className="text-xs md:text-sm lg:text-md font-light hover:text-orange-400 text-blue-400 underline">
             {props.tag}
         </button>
+    )
+}
+
+//to render copy link button
+function LinkButton(props) {
+
+    //function for copy link//function for copy link
+    const copyToClipboard = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            alert('Link copied to clipboard!');
+        } catch (error) {
+            alert('Failed to copy link');
+        }
+    };
+
+    return (
+        <div className="absolute bottom-0 right-2 w-12 h-12 lg:w-16 lg:h-16">
+            <button
+                onClick={() => copyToClipboard(props.item.url)}
+                className="w-full h-full object-cover hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <img src={linkIcon}
+                    alt="link-circle"
+                    className="w-full h-full object-cover"
+                />
+            </button>
+        </div>
     )
 }
 
