@@ -21,7 +21,7 @@ function HomePage() {
     //Get Data
     const getData = async () => {
         try {
-            const response = await axios.get(`${API_BASE}/api/trips?keywords=${keywords}`)
+            const response = await axios.get(`${API_BASE}/trips?keywords=${keywords}`)
             setToDisplay(response.data.data);
         } catch (error) {
             console.log(error);
