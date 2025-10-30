@@ -4,7 +4,6 @@ import cors from "cors";
 import trips from "./db.js";
 
 const app = express();
-const port = 4001;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,6 +36,4 @@ app.get("/trips", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running at port ${port}`);
-});
+export default app;
