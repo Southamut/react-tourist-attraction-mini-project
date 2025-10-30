@@ -17,27 +17,27 @@ function TripSuggestList(props) {
                     </div>
 
                     {/* right-box */}
-                    <div className="w-full sm:pl-4 sm:w-2/3 flex flex-col gap-1 relative">
+                    <div className="w-full sm:pl-4 sm:w-2/3 flex flex-col gap-2 relative">
                         {/* half-top */}
                         <div>
                             <a
                                 href={item.url}
-                                className="text-md md:text-lg lg:text-2xl font-bold text-gray-800 hover:text-orange-400">{item.title}</a>
-                            <p className="text-xs md:text-sm lg:text-md font-medium text-gray-500">
+                                className="text-md md:text-lg lg:text-xl xl:text-3xl font-bold text-gray-800 hover:text-orange-400">{item.title}</a>
+                            <p className="text-xs md:text-sm lg:text-md xl:text-xl font-medium text-gray-500">
                                 {item.description.length > 100 ? item.description.slice(0, 100) + "..." : item.description}
                             </p>
                             <a href={item.url}
-                                className="text-xs md:text-sm lg:text-md font-light hover:text-orange-400 text-blue-400 underline"
+                                className="text-xs md:text-sm lg:text-md xl:text-xl font-light hover:text-orange-400 text-blue-400 underline"
                             >อ่านต่อ
                             </a>
                             <div className="flex flex-row gap-2 flex-wrap">
-                                <p className="text-xs md:text-sm font-medium text-gray-500">หมวด</p>
+                                <p className="text-xs md:text-sm lg:text-md xl:text-xl font-medium text-gray-500">หมวด</p>
                                 {item.tags.map((tag, index) => {
                                     if (index === item.tags.length - 1 && index > 0) {
                                         return [
                                             <p
                                                 key={`and-${index}`}
-                                                className="text-xs md:text-sm lg:text-md font-medium text-gray-500"
+                                                className="text-xs md:text-sm lg:text-md xl:text-xl font-medium text-gray-500"
                                             >และ</p>,
                                             <Tag key={`tag-${index}`} tag={tag} onTagClick={props.onTagClick} />
                                         ];
@@ -82,7 +82,7 @@ function Tag(props) {
         <button
             key={props.index}
             onClick={() => props.onTagClick(props.tag)}//to run tag function that input is (props.tag)
-            className="text-xs md:text-sm lg:text-md font-light hover:text-orange-400 text-blue-400 underline">
+            className="text-xs md:text-sm lg:text-md xl:text-xl font-light hover:text-orange-400 text-blue-400 underline">
             {props.tag}
         </button>
     )
