@@ -2,6 +2,9 @@ import TripSuggestList from "./TripSuggestList";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+// Use environment-based API base URL. On Vercel prod, leave empty to use relative path
+const API_BASE = import.meta.env.VITE_API_BASE || "";
+
 
 function HomePage() {
 
@@ -18,7 +21,7 @@ function HomePage() {
     //Get Data
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4001/trips?keywords=${keywords}`)
+            const response = await axios.get(`${API_BASE}/api/trips?keywords=${keywords}`)
             setToDisplay(response.data.data);
         } catch (error) {
             console.log(error);
