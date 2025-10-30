@@ -2,6 +2,9 @@ import TripSuggestList from "./TripSuggestList";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+// Use environment-based API base URL. On Vercel prod, leave empty to use relative path
+const API_BASE = import.meta.env.VITE_API_BASE || "";
+
 
 function HomePage() {
 
@@ -18,7 +21,7 @@ function HomePage() {
     //Get Data
     const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4001/trips?keywords=${keywords}`)
+            const response = await axios.get(`${API_BASE}/trips?keywords=${keywords}`)
             setToDisplay(response.data.data);
         } catch (error) {
             console.log(error);
@@ -58,11 +61,11 @@ function HomePage() {
             {/* search box */}
             <div className="flex flex-col items-center justify-center mt-10 mb-5">
                 <label htmlFor="search"
-                    className="text-sm font-bold text-gray-500 w-9/12 text-left"
+                    className="text-sm xl:text-xl font-bold text-gray-500 w-9/12 text-left"
                 >หาที่เที่ยวแล้วไปกัน</label>
                 <input type="text"
                     placeholder="หาที่เที่ยวแล้วไปกัน..."
-                    className="w-9/12 p-2 text-center border-b-1 border-gray-300"
+                    className="w-9/12 p-2 text-center text-sm xl:text-xl border-b-1 border-gray-300"
                     onChange={handleChange}
                     value={keywords}
                 />
